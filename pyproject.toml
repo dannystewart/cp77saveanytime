@@ -1,0 +1,20 @@
+[project]
+name = "cp77saver"
+version = "0.1.0"
+description = "Patcher to allow Cyberpunk 2077 to save games at any time"
+authors = [{ name = "Danny Stewart", email = "danny@stewart.cc" }]
+license = { text = "MIT" }
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = []
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.12.11"
+mypy = "^1.17.1"
+
+[project.scripts]
+cp77saver = "cp77saver.main:main"

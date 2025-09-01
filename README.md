@@ -26,4 +26,4 @@ Without installing:
 python cp77saver.py "C:\Program Files (x86)\Steam\steamapps\common\Cyberpunk 2077"
 ```
 
-It can also be run directly from the game's root folder or the `bin\x64` subfolder and it'll find the EXE automatically.
+If no argument is given, it'll try to find it in the default Steam directory. It can also be run directly from the game's root folder or the `bin\x64` subfolder and it'll find the EXE automatically.

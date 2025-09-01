@@ -31,6 +31,16 @@ def write_bytes(exe_path: Path, pos: int, to_write: bytes) -> None:
         f.write(to_write)
 
 
+def find_steam_cp77() -> Path | None:
+    """Find Cyberpunk 2077 in the default Steam directory."""
+    steam_path = Path("C:/Program Files (x86)/Steam/steamapps/common/Cyberpunk 2077")
+    if steam_path.exists():
+        exe_path = steam_path / "bin" / "x64" / "Cyberpunk2077.exe"
+        if exe_path.exists():
+            return exe_path
+    return None
+
+
 def find_exe_path(path: Path) -> Path:
     """Find the executable file in the given path."""
     # Determine the exe path
@@ -91,15 +101,31 @@ def parse_args() -> argparse.Namespace:
         "path",
         nargs="?",
         type=Path,
-        default=Path.cwd(),
-        help="path to Cyberpunk 2077 directory (default: current)",
+        help="path to Cyberpunk 2077 directory or executable",
     )
     return parser.parse_args()
 
 
 if __name__ == "__main__":
     args = parse_args()
-    exe_path = find_exe_path(args.path)
+
+    # If no path provided, try to find it in Steam
+    if not args.path:
+        steam_exe = find_steam_cp77()
+        if steam_exe:
+            print(f"Found Cyberpunk 2077 at: {steam_exe}")
+            confirm = input("Use this executable? (y/n): ").lower().strip()
+            if confirm in {"y", "yes"}:
+                exe_path = steam_exe
+            else:
+                print("Please rerun the script and specify the path manually.")
+                sys.exit(0)
+        else:
+            print("Could not find Cyberpunk 2077 in Steam directory.")
+            print("Please rerun the script and specify the path manually.")
+            sys.exit(0)
+    else:
+        exe_path = find_exe_path(args.path)
 
     try:
         patch_exe(exe_path, args.unpatch)

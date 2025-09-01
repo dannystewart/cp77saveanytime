@@ -1,6 +1,6 @@
 [project]
 name = "cp77saver"
-version = "0.1.0"
+version = "0.2.0"
 description = "Patcher to allow Cyberpunk 2077 to save games at any time"
 authors = [{ name = "Danny Stewart", email = "danny@stewart.cc" }]
 license = { text = "MIT" }

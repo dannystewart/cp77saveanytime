@@ -63,6 +63,28 @@ def find_exe_path(path: Path) -> Path:
     return exe_path
 
 
+def check_paths(args: argparse.Namespace) -> Path:
+    """Check the paths and return the executable path."""
+    if not args.path:
+        steam_exe = find_steam_cp77()
+        if steam_exe:
+            print(f"Found Cyberpunk 2077 at: {steam_exe}")
+            confirm = input("Use this executable? (y/n): ").lower().strip()
+            if confirm in {"y", "yes"}:
+                exe_path = steam_exe
+            else:
+                print("Please rerun the script and specify the path manually.")
+                sys.exit(0)
+        else:
+            print("Could not find Cyberpunk 2077 in Steam directory.")
+            print("Please rerun the script and specify the path manually.")
+            sys.exit(0)
+    else:
+        exe_path = find_exe_path(args.path)
+
+    return exe_path
+
+
 def patch_exe(exe_path: Path, unpatch: bool = False) -> None:
     """Patch or unpatch the executable file.
 
@@ -106,26 +128,10 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
-if __name__ == "__main__":
+def main() -> None:
+    """Main function."""
     args = parse_args()
-
-    # If no path provided, try to find it in Steam
-    if not args.path:
-        steam_exe = find_steam_cp77()
-        if steam_exe:
-            print(f"Found Cyberpunk 2077 at: {steam_exe}")
-            confirm = input("Use this executable? (y/n): ").lower().strip()
-            if confirm in {"y", "yes"}:
-                exe_path = steam_exe
-            else:
-                print("Please rerun the script and specify the path manually.")
-                sys.exit(0)
-        else:
-            print("Could not find Cyberpunk 2077 in Steam directory.")
-            print("Please rerun the script and specify the path manually.")
-            sys.exit(0)
-    else:
-        exe_path = find_exe_path(args.path)
+    exe_path = find_exe_path(args.path)
 
     try:
         patch_exe(exe_path, args.unpatch)
@@ -134,4 +140,8 @@ if __name__ == "__main__":
     except Exception:
         traceback.print_exc()
     finally:
-        input("Press enter to exit.")
+        input("Press Enter to exit.")
+
+
+if __name__ == "__main__":
+    main()

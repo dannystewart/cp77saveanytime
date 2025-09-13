@@ -1,5 +1,5 @@
 [project]
-name = "cp77saver"
+name = "cp77saveanytime"
 version = "0.2.0"
 description = "Patcher to allow Cyberpunk 2077 to save games at any time"
 authors = [{ name = "Danny Stewart", email = "danny@stewart.cc" }]
@@ -17,4 +17,4 @@ ruff = "^0.12.11"
 mypy = "^1.17.1"
 
 [project.scripts]
-cp77saver = "cp77saver.main:main"
+cp77saveanytime = "cp77saveanytime.main:main"

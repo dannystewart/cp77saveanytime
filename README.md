@@ -10,20 +10,20 @@ Using Poetry:
 
 ```bash
 poetry install
-poetry run cp77saver "C:\Program Files (x86)\Steam\steamapps\common\Cyberpunk 2077"
+poetry run cp77saveanytime "C:\Program Files (x86)\Steam\steamapps\common\Cyberpunk 2077"
 ```
 
 Using pip:
 
 ```bash
 pip install .
-cp77saver "C:\Program Files (x86)\Steam\steamapps\common\Cyberpunk 2077"
+cp77saveanytime "C:\Program Files (x86)\Steam\steamapps\common\Cyberpunk 2077"
 ```
 
 Without installing:
 
 ```bash
-python cp77saver.py "C:\Program Files (x86)\Steam\steamapps\common\Cyberpunk 2077"
+python cp77saveanytime.py "C:\Program Files (x86)\Steam\steamapps\common\Cyberpunk 2077"
 ```
 
 If no argument is given, it'll try to find it in the default Steam directory. It can also be run directly from the game's root folder or the `bin\x64` subfolder and it'll find the EXE automatically.
